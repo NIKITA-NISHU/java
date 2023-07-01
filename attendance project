@@ -1,0 +1,45 @@
+import java.util.*;
+
+class AttendanceApp {
+    private Map<String, Boolean> attendanceRecord;
+
+    public AttendanceApp() {
+        attendanceRecord = new HashMap<>();
+    }
+
+    public void markAttendance(String studentName) {
+        attendanceRecord.put(studentName, true);
+    }
+
+    public void markAbsent(String studentName) {
+        attendanceRecord.put(studentName, false);
+    }
+
+    public boolean isPresent(String studentName) {
+        return attendanceRecord.getOrDefault(studentName, false);
+    }
+
+    public void printAttendanceReport() {
+        System.out.println("Attendance Report:");
+        for (Map.Entry<String, Boolean> entry : attendanceRecord.entrySet()) {
+            System.out.println(entry.getKey() + ": " + (entry.getValue() ? "Present" : "Absent"));
+        }
+    }
+
+    public static void main(String[] args) {
+        AttendanceApp app = new AttendanceApp();
+
+        // Mark attendance
+        app.markAttendance("John");
+        app.markAttendance("Alice");
+        app.markAbsent("Bob");
+
+        // Check attendance status
+        System.out.println("John's attendance: " + (app.isPresent("John") ? "Present" : "Absent"));
+        System.out.println("Alice's attendance: " + (app.isPresent("Alice") ? "Present" : "Absent"));
+        System.out.println("Bob's attendance: " + (app.isPresent("Bob") ? "Present" : "Absent"));
+
+        // Print attendance report
+        app.printAttendanceReport();
+    }
+}
